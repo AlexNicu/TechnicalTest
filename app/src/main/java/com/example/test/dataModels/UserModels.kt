@@ -22,7 +22,12 @@ data class Dob(
 )
 
 data class Location(
-    val country: String
+    val country: String,
+    val timezone: Timezone
+)
+
+data class Timezone(
+    val offset: String
 )
 
 data class Picture(

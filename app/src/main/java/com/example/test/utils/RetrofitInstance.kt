@@ -1,6 +1,6 @@
 package com.example.test.utils
 
-import com.example.test.Users.UserServiceInterface
+import com.example.test.users.UserServiceInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -1,4 +1,4 @@
-package com.example.test.Users
+package com.example.test.users
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,9 +17,9 @@ class UsersViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = repository.getUsers(page)
-                _users.value = response.results
+                _users.postValue(response.results)
             } catch (e: Exception) {
-                e.printStackTrace()
+                android.util.Log.e("UsersViewModel", "API Call Failed", e)
             }
         }
     }

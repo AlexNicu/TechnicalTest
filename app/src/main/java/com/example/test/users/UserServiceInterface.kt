@@ -1,4 +1,4 @@
-package com.example.test.Users
+package com.example.test.users
 
 import com.example.test.dataModels.UserResponse
 import retrofit2.http.GET
