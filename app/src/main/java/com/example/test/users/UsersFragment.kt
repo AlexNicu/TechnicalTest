@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.databinding.FragmentUsersBinding
@@ -31,17 +32,17 @@ class UsersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Setup RecyclerView
         adapter = UserAdapter(mutableListOf())
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 
-        // Observe ViewModel
+        val itemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        binding.recyclerView.addItemDecoration(itemDecoration)
+
         viewModel.users.observe(viewLifecycleOwner) { users ->
             adapter.addUsers(users)
         }
 
-        // Fetch First Page
         viewModel.fetchUsers(page)
 
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

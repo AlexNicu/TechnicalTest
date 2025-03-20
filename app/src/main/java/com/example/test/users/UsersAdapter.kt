@@ -1,6 +1,7 @@
 package com.example.test.users
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -27,8 +28,7 @@ class UserAdapter(private val users: MutableList<User>) :
                 .circleCrop()
                 .into(binding.ivProfile)
 
-            // TODO: Handle star icon visibility
-            // TODO: Handle attachment icon visibility
+            binding.ivAttachment.visibility = if (shouldShowAttachment()) View.VISIBLE else View.GONE
         }
     }
 
@@ -57,7 +57,6 @@ class UserAdapter(private val users: MutableList<User>) :
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
         return try {
-            // Get current UTC time
             val utcCalendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
             // Parse the offset format
@@ -77,5 +76,9 @@ class UserAdapter(private val users: MutableList<User>) :
             val deviceCalendar = Calendar.getInstance()
             timeFormat.format(deviceCalendar.time)
         }
+    }
+
+    private fun shouldShowAttachment(): Boolean {
+        return (0..1).random() == 1
     }
 }

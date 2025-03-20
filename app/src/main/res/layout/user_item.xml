@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="12dp"
+    >
 
-    <!-- Profile Image -->
     <ImageView
         android:id="@+id/ivProfile"
         android:layout_width="40dp"
@@ -20,7 +22,6 @@
         app:layout_constraintEnd_toStartOf="@id/tvName"
         app:srcCompat="@drawable/ic_placeholder" />
 
-    <!-- Name -->
     <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
@@ -34,7 +35,6 @@
         android:layout_marginEnd="10dp"
         android:text="@string/full_name_user_item_placeholder" />
 
-    <!-- Age & Country -->
     <TextView
         android:id="@+id/tvAgeCountry"
         android:layout_width="0dp"
@@ -45,10 +45,8 @@
         app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintEnd_toStartOf="@id/ivAttachment"
         android:layout_marginEnd="10dp"
-
         android:text="@string/user_item_placeholder_text" />
 
-    <!-- Star (Favorite) -->
     <ImageView
         android:id="@+id/ivAttachment"
         android:layout_width="24dp"
@@ -61,7 +59,6 @@
         android:layout_marginEnd="8dp"
         />
 
-    <!-- Timestamp -->
     <TextView
         android:id="@+id/tvTimestamp"
         android:layout_width="wrap_content"
@@ -72,7 +69,6 @@
         app:layout_constraintTop_toTopOf="@id/tvName"
         android:text="@string/user_item_placehodler_clock" />
 
-    <!-- Star (Favorite) -->
     <ImageView
         android:id="@+id/ivStar"
         android:layout_width="24dp"
