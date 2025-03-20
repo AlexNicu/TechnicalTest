@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.test.databinding.FragmentUsersBinding
 
 /**
@@ -17,6 +18,7 @@ class UsersFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: UsersViewModel by viewModels()
     private lateinit var adapter: UserAdapter
+    private var page = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +42,32 @@ class UsersFragment : Fragment() {
         }
 
         // Fetch First Page
-        viewModel.fetchUsers(0)
+        viewModel.fetchUsers(page)
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val totalItems = layoutManager.itemCount
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+
+                if (!viewModel.isLoading.value!! && totalItems - lastVisibleItem <= 3) {
+                    page++
+                    viewModel.fetchUsers(page)
+                }
+            }
+        })
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+            android.util.Log.d("UsersFragment", "Loading state: $loading")
+            binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        page = 1
         _binding = null
     }
 }
